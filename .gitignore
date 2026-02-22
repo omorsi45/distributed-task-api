@@ -1,0 +1,46 @@
+# Build
+build/
+out/
+target/
+*.jar
+*.war
+*.ear
+*.class
+
+# Gradle
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+*.swo
+*~
+
+# Environment and secrets (never commit)
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test / coverage
+.coverage
+htmlcov/
+*.gcov
+.jacoco/
+
+# Spring Boot
+spring-boot-devtools.properties

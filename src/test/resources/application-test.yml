@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/testdb
+    username: test
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+app:
+  security:
+    api-key: test-api-key
+  rate-limit:
+    requests-per-minute: 1000
+  idempotency:
+    ttl-hours: 1
+
+logging:
+  level:
+    root: WARN
+    com.taskapi: DEBUG

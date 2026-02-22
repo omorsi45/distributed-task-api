@@ -1,0 +1,119 @@
+{
+  "info": {
+    "name": "Distributed Task API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "apiKey", "value": "docker-api-key" },
+    { "key": "taskId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/actuator/health"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "Create task",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "X-API-Key", "value": "{{apiKey}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Sample task\",\n  \"description\": \"Description\",\n  \"status\": \"TODO\",\n  \"priority\": \"HIGH\",\n  \"assignee\": \"alice\",\n  \"tags\": [\"backend\"]\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/tasks"
+          }
+        },
+        {
+          "name": "Get task by ID",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-API-Key", "value": "{{apiKey}}" } ],
+            "url": "{{baseUrl}}/api/v1/tasks/{{taskId}}"
+          }
+        },
+        {
+          "name": "List tasks",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-API-Key", "value": "{{apiKey}}" } ],
+            "url": "{{baseUrl}}/api/v1/tasks?page=0&size=20&sort=createdAt&direction=desc"
+          }
+        },
+        {
+          "name": "Update task",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "X-API-Key", "value": "{{apiKey}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated title\",\n  \"status\": \"IN_PROGRESS\",\n  \"priority\": \"MEDIUM\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/tasks/{{taskId}}"
+          }
+        },
+        {
+          "name": "Patch status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "X-API-Key", "value": "{{apiKey}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"DONE\"\n}" },
+            "url": "{{baseUrl}}/api/v1/tasks/{{taskId}}/status"
+          }
+        },
+        {
+          "name": "Get task events",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-API-Key", "value": "{{apiKey}}" } ],
+            "url": "{{baseUrl}}/api/v1/tasks/{{taskId}}/events?page=0&size=20"
+          }
+        },
+        {
+          "name": "Delete task",
+          "request": {
+            "method": "DELETE",
+            "header": [ { "key": "X-API-Key", "value": "{{apiKey}}" } ],
+            "url": "{{baseUrl}}/api/v1/tasks/{{taskId}}"
+          }
+        },
+        {
+          "name": "Bulk create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "X-API-Key", "value": "{{apiKey}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\"title\": \"Bulk 1\", \"status\": \"TODO\"},\n  {\"title\": \"Bulk 2\", \"priority\": \"HIGH\"}\n]"
+            },
+            "url": "{{baseUrl}}/api/v1/tasks/bulk"
+          }
+        }
+      ]
+    }
+  ]
+}
