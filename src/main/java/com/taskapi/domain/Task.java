@@ -52,7 +52,7 @@ public class Task {
     @Version
     private Long version;
 
-    // search_vector is a DB-only tsvector column (Flyway V2); used in native queries in TaskRepositoryImpl, not mapped here to avoid schema validation mismatch
+    // search_vector: DB tsvector column, used in TaskRepositoryImpl native queries only (not mapped to avoid Hibernate schema validation)
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
